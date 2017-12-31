@@ -115,6 +115,23 @@
     }
     else {
         
+        NSArray *excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage];
+        
+        UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[self.imageView.image] applicationActivities:nil];
+        
+        activityView.excludedActivityTypes = excludedActivityTypes;
+        activityView.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+            if(completed && [activityType isEqualToString:UIActivityTypeSaveToCameraRoll]){
+                
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Image Saved Successfully" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:okAction];
+                
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+        };
+        
+        [self presentViewController:activityView animated:YES completion:nil];
     }
     
 }
