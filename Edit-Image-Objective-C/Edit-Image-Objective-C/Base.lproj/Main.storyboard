@@ -33,7 +33,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="clN-RS-Kbz"/>
                                 </connections>
                             </tabBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9Y-Hk-wWc">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9Y-Hk-wWc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                             </scrollView>
                         </subviews>
