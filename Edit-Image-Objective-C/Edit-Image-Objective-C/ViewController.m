@@ -93,7 +93,10 @@
         });
     }
     else {
+        CLImageEditor *imageEditor = [[CLImageEditor  alloc] initWithImage:self.imageView.image];
+        imageEditor.delegate = self;
         
+        [self presentViewController:imageEditor animated:YES completion:nil];
     }
     
 }
@@ -209,6 +212,17 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [picker dismissViewControllerAnimated:YES completion:nil];
     });
+}
+#pragma mark- CLImageEditorDelegate Method
+
+- (void)imageEditor:(CLImageEditor *)editor didFinishEditingWithImage:(UIImage *)image
+{
+    if(image) {
+        self.imageView.image = image;
+        [self refreshImageView];
+    }
+    
+    [editor dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
