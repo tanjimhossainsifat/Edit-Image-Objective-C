@@ -13,6 +13,7 @@
 @interface ViewController ()<CLImageEditorDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, assign) BOOL isImageCapturedOrSelected;
 
 @end
 
@@ -23,6 +24,7 @@
     
     UIView *contentView = [UIView new];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default"]];
+    self.isImageCapturedOrSelected = NO;
     [contentView addSubview:imageView];
     [_scrollView addSubview:contentView];
     _imageView = imageView;
@@ -77,6 +79,43 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+-(void) onButtonEdit {
+    
+    if(self.isImageCapturedOrSelected == NO) {
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please select or capture an image" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:okAction];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:alert animated:YES completion:nil];
+        });
+    }
+    else {
+        
+    }
+    
+}
+-(void) onButtonSave {
+    
+    if(self.isImageCapturedOrSelected == NO) {
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please select or capture an image" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:okAction];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:alert animated:YES completion:nil];
+        });
+    }
+    else {
+        
+    }
+    
+}
+
 #pragma mark - TabbarDelegate Methods
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
@@ -88,9 +127,11 @@
             break;
         case 1:
             NSLog(@"Edit button pressed");
+            [self onButtonEdit];
             break;
         case 2:
             NSLog(@"Save button pressed");
+            [self onButtonSave];
             break;
         default:
             break;
@@ -162,6 +203,7 @@
     
     if(image) {
         self.imageView.image = image;
+        self.isImageCapturedOrSelected = YES;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
