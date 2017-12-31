@@ -1,0 +1,3 @@
+[submodule "CLImageEditor"]
+	path = CLImageEditor
+	url = https://github.com/yackle/CLImageEditor.git

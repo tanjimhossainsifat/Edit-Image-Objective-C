@@ -8,7 +8,9 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+#import "CLImageEditor.h"
+
+@interface ViewController ()<CLImageEditorDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
 
@@ -37,6 +39,43 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Button Action Methods
+
+-(void) onButtonNew {
+    
+    UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:@"Photo Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.editing = NO;
+        imagePicker.delegate = self;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        });
+    }];
+    
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.editing = NO;
+        imagePicker.delegate = self;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        });
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:nil];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Choose any" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:libraryAction];
+    [alert addAction:cameraAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 #pragma mark - TabbarDelegate Methods
 
@@ -45,6 +84,7 @@
     switch (item.tag) {
         case 0:
             NSLog(@"New button pressed");
+            [self onButtonNew];
             break;
         case 1:
             NSLog(@"Edit button pressed");
@@ -112,6 +152,13 @@
 {
     [self resetImageViewFrame];
     [self resetZoomScaleWithAnimate:NO];
+}
+
+#pragma mark- ImagePickerDelegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
 }
 
 @end
