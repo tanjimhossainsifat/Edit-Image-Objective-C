@@ -26,9 +26,12 @@
                                 </constraints>
                                 <items>
                                     <tabBarItem title="New" image="new" id="3uI-tM-Kfo"/>
-                                    <tabBarItem title="Edit" image="edit" id="GAl-hs-lfo"/>
-                                    <tabBarItem title="Save" image="save" id="PJU-w4-g1C"/>
+                                    <tabBarItem tag="1" title="Edit" image="edit" id="GAl-hs-lfo"/>
+                                    <tabBarItem tag="2" title="Save" image="save" id="PJU-w4-g1C"/>
                                 </items>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="clN-RS-Kbz"/>
+                                </connections>
                             </tabBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9Y-Hk-wWc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
@@ -46,6 +49,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="f9Y-Hk-wWc" id="ZmU-ok-AQO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -26,4 +26,26 @@
 }
 
 
+#pragma mark - TabbarDelegate Methods
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    switch (item.tag) {
+        case 0:
+            NSLog(@"New button pressed");
+            break;
+        case 1:
+            NSLog(@"Edit button pressed");
+            break;
+        case 2:
+            NSLog(@"Save button pressed");
+            break;
+        default:
+            break;
+    }
+    
+    tabBar.selectedItem = nil;
+}
+
+
 @end
