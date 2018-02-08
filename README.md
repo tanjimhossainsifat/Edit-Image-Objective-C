@@ -5,3 +5,4 @@ I have used a Library for editing image. You can find this here: https://github.
 
 ![Demo](Demo/Demo1.gif)
 ![Demo](Demo/Demo2.gif)
+![Demo](Demo/Demo3.gif)
